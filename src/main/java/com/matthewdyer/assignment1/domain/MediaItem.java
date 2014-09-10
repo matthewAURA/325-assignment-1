@@ -55,11 +55,11 @@ public class MediaItem {
 	}
 	
 	@Column(name = "TITLE")
-	public String getName(){
+	public String getTitle(){
 		return title;
 	}
 	
-	public void setName(String name){
+	public void setTitle(String name){
 		this.title = name;
 	}
 	

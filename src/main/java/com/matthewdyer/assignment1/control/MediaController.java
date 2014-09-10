@@ -2,11 +2,13 @@ package com.matthewdyer.assignment1.control;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
+import com.matthewdyer.assignment1.domain.MediaItem;
 import com.matthewdyer.assignment1.domain.MediaItems;
 import com.matthewdyer.assignment1.service.MediaItemService;
 
@@ -15,7 +17,7 @@ import com.matthewdyer.assignment1.service.MediaItemService;
 
 
 @Controller
-@RequestMapping(value="/")
+@RequestMapping(value="/MediaItems")
 public class MediaController {
 	
 	@Autowired
@@ -27,6 +29,11 @@ public class MediaController {
 		return new MediaItems(mediaItemService.findAll());
 	}	
   
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	@ResponseBody
+	public MediaItem findContactById(@PathVariable Long id) {		
+		return mediaItemService.findById(id);
+	}
 
 
 }

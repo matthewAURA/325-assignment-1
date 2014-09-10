@@ -2,9 +2,6 @@ package com.matthewdyer.assignment1.service;
 
 import java.util.List;
 
-
-
-
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +30,7 @@ public class DefaultMediaItemService implements MediaItemService {
 
 	@Override
 	public MediaItem findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.mediaDAO.findById(id);
 	}
 
 	@Override
