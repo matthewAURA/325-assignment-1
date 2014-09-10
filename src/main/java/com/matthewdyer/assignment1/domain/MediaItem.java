@@ -7,8 +7,11 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -20,20 +23,18 @@ import javax.persistence.Table;
 
 @NamedQueries({
 	@NamedQuery(name="MediaItem.findById", query="select distinct m from MediaItem m left join fetch m.episodes e where m.id = :id")
-			})/*,
-	@NamedQuery(name="Contact.findAllWithDetail", 
-                query="select distinct c from Contact c left join fetch c.contactTelDetails t left join fetch c.hobbies h")*/
+			})
 public class MediaItem {
 	protected long id;
 	protected String title;
 	protected String description;
-	protected String rating;
+	protected Rating rating;
 	private Set<Episode> episodes;
 	public MediaItem(){
 		
 	}
 	
-	protected MediaItem(String name, String description,String rating,long id){
+	protected MediaItem(String name, String description,Rating rating,long id){
 		this(name,description);
 		this.id = id;
 	}
@@ -41,12 +42,10 @@ public class MediaItem {
 	protected MediaItem(String name, String description){
 		this.title = name;
 		this.description = description;
-		this.rating = rating;
 	}
 	
-	@OneToMany(mappedBy = "media", targetEntity=Episode.class, orphanRemoval=true, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "media", targetEntity=Episode.class, orphanRemoval=true, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	public Set<Episode> getEpisodes() {
-		System.out.println("get episodes");
 		return this.episodes;
 	}
 
@@ -71,14 +70,16 @@ public class MediaItem {
 	public void setDescription(String desc){
 		this.description = desc;
 	}
-	/*
-	public String getRating(){
+	
+	@ManyToOne
+	@JoinColumn(name = "RATING_ID")
+	public Rating getRating(){
 		return rating;
 	}
 	
-	public void setRating(String r){
+	public void setRating(Rating r){
 		this.rating = r;
-	}*/
+	}
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

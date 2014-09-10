@@ -55,11 +55,11 @@ public class Episode implements Serializable {
 	}
 	
 	@Column(name="EPISODE_TITLE")
-	public String getTitle(){
+	public String getEpisodeTitle(){
 		return this.episodeTitle;
 	}
 	
-	public void setTitle(String t){
+	public void setEpisodeTitle(String t){
 		this.episodeTitle = t;
 	}
 	

@@ -37,8 +37,7 @@ public class MediaDAOImpl implements MediaDAO {
 	}
 
 	public void save(MediaItem m) {
-		// TODO Auto-generated method stub
-
+		sessionFactory.getCurrentSession().saveOrUpdate(m);
 	}
 
 	public void delete(MediaItem m) {
