@@ -1,0 +1,19 @@
+<mapping>
+    <class name="com.matthewdyer.assignment1.domain.MediaItems">
+        <field name="mediaItems" type="com.matthewdyer.assignment1.domain.MediaItem" collection="arraylist">
+            <bind-xml name="mediaItems"/>
+        </field>    
+    </class>
+
+    <class name="com.matthewdyer.assignment1.domain.MediaItem" identity="id">
+    
+        <map-to xml="mediaItem" />
+        
+        <field name="id" type="long">
+            <bind-xml name="id" node="element"/>
+        </field>             
+            
+    
+    </class>
+
+</mapping>

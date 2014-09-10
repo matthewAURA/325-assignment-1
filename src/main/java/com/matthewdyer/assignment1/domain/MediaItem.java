@@ -19,26 +19,26 @@ import javax.persistence.Table;
 @Table(name = "MEDIA")
 
 @NamedQueries({
-	@NamedQuery(name="Media.findById", query="select distinct m from Media m left join fetch m.episodes e where m.id = :id")
+	@NamedQuery(name="MediaItem.findById", query="select distinct m from MediaItem m left join fetch m.episodes e where m.id = :id")
 			})/*,
 	@NamedQuery(name="Contact.findAllWithDetail", 
                 query="select distinct c from Contact c left join fetch c.contactTelDetails t left join fetch c.hobbies h")*/
-public class Media {
+public class MediaItem {
 	protected long id;
 	protected String title;
 	protected String description;
 	protected String rating;
 	private Set<Episode> episodes;
-	public Media(){
+	public MediaItem(){
 		
 	}
 	
-	protected Media(String name, String description,String rating,long id){
+	protected MediaItem(String name, String description,String rating,long id){
 		this(name,description);
 		this.id = id;
 	}
 	
-	protected Media(String name, String description){
+	protected MediaItem(String name, String description){
 		this.title = name;
 		this.description = description;
 		this.rating = rating;

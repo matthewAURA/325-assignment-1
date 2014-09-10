@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import com.matthewdyer.assignment1.domain.Media;
+import com.matthewdyer.assignment1.domain.MediaItem;
 
 @Repository("mediaDAO")
 @Transactional
@@ -27,21 +27,21 @@ public class MediaDAOImpl implements MediaDAO {
 	}
 	
 	@Transactional(readOnly=true)
-	public List<Media> findAll() {
-		List<Media> result = this.sessionFactory.getCurrentSession().createQuery("from Media m").list();
+	public List<MediaItem> findAll() {
+		List<MediaItem> result = this.sessionFactory.getCurrentSession().createQuery("from MediaItem m").list();
 		return result;
 	}
 
-	public Media findById(long id) {
-		return (Media) this.sessionFactory.getCurrentSession().getNamedQuery("Media.findById").setParameter("id", id).uniqueResult();
+	public MediaItem findById(long id) {
+		return (MediaItem) this.sessionFactory.getCurrentSession().getNamedQuery("MediaItem.findById").setParameter("id", id).uniqueResult();
 	}
 
-	public void save(Media m) {
+	public void save(MediaItem m) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void delete(Media m) {
+	public void delete(MediaItem m) {
 		// TODO Auto-generated method stub
 
 	}

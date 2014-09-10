@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class Episode implements Serializable {
 	
 	private long id;
-	private Media media;
+	private MediaItem media;
 	private int season;
 	private String episodeTitle;
 	
@@ -37,11 +37,11 @@ public class Episode implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "MEDIA_ID")
-	public Media getMedia() {
+	public MediaItem getMedia() {
 		return this.media;
 	}
 
-	public void setMedia(Media m) {
+	public void setMedia(MediaItem m) {
 		this.media = m;
 	}
 	
