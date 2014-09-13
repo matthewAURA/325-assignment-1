@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.matthewdyer.assignment1.domain.MediaItem;
 import com.matthewdyer.assignment1.persistance.MediaDAO;
@@ -24,6 +26,7 @@ public class DefaultMediaItemService implements MediaItemService {
 	
 	
 	@Override
+	@Transactional(readOnly=true, propagation=Propagation.REQUIRED)
 	public List<MediaItem> findAll() {
 		return this.mediaDAO.findAll();
 	}
@@ -34,12 +37,14 @@ public class DefaultMediaItemService implements MediaItemService {
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
 	public MediaItem save(MediaItem contact) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void delete(MediaItem contact) {
 		// TODO Auto-generated method stub
 

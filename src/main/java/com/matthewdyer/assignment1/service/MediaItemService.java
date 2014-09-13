@@ -10,7 +10,7 @@ public interface MediaItemService {
 	
 	public MediaItem findById(Long id);
 	
-	public MediaItem save(MediaItem contact);
+	public MediaItem save(MediaItem mediaItem);
 	
-	public void delete(MediaItem contact);
+	public void delete(MediaItem mediaItem);
 }

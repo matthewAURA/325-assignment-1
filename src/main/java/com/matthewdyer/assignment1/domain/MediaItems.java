@@ -19,7 +19,7 @@ public class MediaItems implements Serializable {
 		return mediaItems;
 	}
 
-	public void setContacts(List<MediaItem> mediaItems) {
+	public void setMediaItems(List<MediaItem> mediaItems) {
 		this.mediaItems = mediaItems;
 	}
 	 

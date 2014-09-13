@@ -2,6 +2,7 @@ package com.matthewdyer.assignment1.domain;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -24,7 +25,7 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name="MediaItem.findById", query="select distinct m from MediaItem m left join fetch m.episodes e where m.id = :id")
 			})
-public class MediaItem {
+public class MediaItem implements Serializable {
 	protected long id;
 	protected String title;
 	protected String description;

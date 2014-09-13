@@ -6,10 +6,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "RATING")
+@NamedQueries({
+	@NamedQuery(name="Rating.findById", query="select distinct r from Rating r where r.id = :id")
+			})
 public class Rating {
 	
 	private long id;

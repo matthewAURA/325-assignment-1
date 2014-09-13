@@ -38,6 +38,12 @@
         </field>             
              
     </class>
+    
+    <class name="com.matthewdyer.assignment1.domain.Ratings">
+        <field name="rating" type="com.matthewdyer.assignment1.domain.Rating" collection="arraylist">
+            <bind-xml name="rating"/>
+        </field>    
+    </class>
 
 
 	<class name="com.matthewdyer.assignment1.domain.Rating">

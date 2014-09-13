@@ -5,9 +5,9 @@ import java.util.List;
 import com.matthewdyer.assignment1.domain.MediaItem;
 import com.matthewdyer.assignment1.domain.Rating;
 
-public interface MediaDAO {
-	public List<MediaItem> findAll();
-	public MediaItem findById(long id);
-	public void save(MediaItem m);
-	public void delete(MediaItem m);
+public interface RatingDAO {
+	public List<Rating> findAll();
+	public Rating findById(long id);
+	public void save(Rating m);
+	public void delete(Rating m);
 }

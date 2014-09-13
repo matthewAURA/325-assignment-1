@@ -13,43 +13,48 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.matthewdyer.assignment1.domain.MediaItem;
 import com.matthewdyer.assignment1.domain.MediaItems;
+import com.matthewdyer.assignment1.domain.Rating;
+import com.matthewdyer.assignment1.domain.Ratings;
 import com.matthewdyer.assignment1.service.MediaItemService;
+import com.matthewdyer.assignment1.service.RatingService;
 
 
 
 
 
 @Controller
-@RequestMapping(value="/MediaItems")
-public class MediaController {
+@RequestMapping(value="/Ratings")
+public class RatingController {
 	
 	@Autowired
-	private MediaItemService mediaItemService;
+	private RatingService ratingService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public MediaItems listData(WebRequest webRequest) {
-		return new MediaItems(mediaItemService.findAll());
+	public Ratings listData(WebRequest webRequest) {
+		return new Ratings(ratingService.findAll());
 	}	
   
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	@ResponseBody
-	public MediaItem findContactById(@PathVariable Long id) {		
-		return mediaItemService.findById(id);
+	public Rating findContactById(@PathVariable Long id) {		
+		return ratingService.findById(id);
 	}
 	
-	@RequestMapping(value="/create", method=RequestMethod.POST)
+	@RequestMapping(value="/Create", method=RequestMethod.POST)
 	@ResponseBody
-	public MediaItem create(@RequestBody MediaItem m, HttpServletResponse response) {
-		mediaItemService.save(m);
-		response.setHeader("Location",  "/MediaItems/" + m.getId());
-		return m;
+	public Rating create(@RequestBody Rating r, HttpServletResponse response) {
+		ratingService.save(r);
+		response.setHeader("Location",  "/Ratings/" + r.getId());
+		return r;
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	@ResponseBody
-	public void update(@RequestBody MediaItem m, @PathVariable Long id) {		
-		this.mediaItemService.save(m);
+	public Rating update(@RequestBody Rating r, @PathVariable Long id) {	
+		r.setId(id);
+		this.ratingService.save(r);
+		return r;
 	}
 
 
