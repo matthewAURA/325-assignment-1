@@ -21,7 +21,6 @@ public class DefaultRatingService implements RatingService {
 		ctx.refresh();
 		
 		this.ratingDAO = ctx.getBean("ratingDAO",RatingDAO.class);
-
 	}
 
 	@Override
@@ -42,8 +41,7 @@ public class DefaultRatingService implements RatingService {
 
 	@Override
 	public void delete(Rating rating) {
-		// TODO Auto-generated method stub
-		
+		ratingDAO.delete(rating);
 	}
 	
 

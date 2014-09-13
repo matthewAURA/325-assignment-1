@@ -10,11 +10,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "MEDIA_EPISODE")
+
+@NamedQueries({
+	@NamedQuery(name="Episode.findById", query="select distinct e from Episode e where e.id = :id")
+			})
 public class Episode implements Serializable {
 	
 	private long id;

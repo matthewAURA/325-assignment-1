@@ -16,7 +16,7 @@ import javax.persistence.Table;
 	@NamedQuery(name="Rating.findById", query="select distinct r from Rating r where r.id = :id")
 			})
 public class Rating {
-	
+
 	private long id;
 	private String ratingName;
 	

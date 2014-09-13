@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 
 
 
@@ -42,13 +44,15 @@ public class MediaDAOImpl implements MediaDAO {
 	}
 	
 	@Override
-	public void save(MediaItem m) {
-		sessionFactory.getCurrentSession().saveOrUpdate(m);
+	@Transactional(propagation=Propagation.REQUIRED)
+	public MediaItem save(MediaItem m) {
+			sessionFactory.getCurrentSession().saveOrUpdate(m);
+			return m;
 	}
 	
 	@Override
 	public void delete(MediaItem m) {
-		// TODO Auto-generated method stub
+		sessionFactory.getCurrentSession().delete(m);
 
 	}
 

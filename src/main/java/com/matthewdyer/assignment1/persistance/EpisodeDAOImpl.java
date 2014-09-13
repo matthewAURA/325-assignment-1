@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -13,12 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 
+
+import com.matthewdyer.assignment1.domain.Episode;
 import com.matthewdyer.assignment1.domain.MediaItem;
 import com.matthewdyer.assignment1.domain.Rating;
 
-@Repository("ratingDAO")
+@Repository("episodeDAO")
 @Transactional
-public class RatingDAOImpl implements RatingDAO {
+public class EpisodeDAOImpl implements EpisodeDAO {
 
 	private SessionFactory sessionFactory;
 	
@@ -31,27 +34,30 @@ public class RatingDAOImpl implements RatingDAO {
 		this.sessionFactory = sessionFactory;
 	}
 	
+	@Override
+	public List<Episode> findAll() {
+		List<Episode> result = this.sessionFactory.getCurrentSession().createQuery("from Episode m").list();
+		return result;
+	}
 	
 	@Override
-	public void save(Rating m) {
-		sessionFactory.getCurrentSession().saveOrUpdate(m);
+	public Episode findById(long id) {
+		return (Episode) this.sessionFactory.getCurrentSession().getNamedQuery("Episode.findById").setParameter("id", id).uniqueResult();
 	}
 	
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED)
-	public void delete(Rating m) {
-		this.sessionFactory.getCurrentSession().delete(m);
+	public Episode save(Episode m) {
+			sessionFactory.getCurrentSession().saveOrUpdate(m);
+			return m;
+	}
+	
+	@Override
+	public void delete(Episode m) {
+		sessionFactory.getCurrentSession().delete(m);
+
 	}
 
-	@Override
-	public List<Rating> findAll() {
-		List<Rating> result = this.sessionFactory.getCurrentSession().createQuery("from Rating r").list();
-		return result;
-	}
 
-	@Override
-	public Rating findById(long id) {
-		return (Rating) this.sessionFactory.getCurrentSession().getNamedQuery("Rating.findById").setParameter("id", id).uniqueResult();
-	}
 
 }

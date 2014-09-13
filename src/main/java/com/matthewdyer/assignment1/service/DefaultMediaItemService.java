@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.matthewdyer.assignment1.domain.Episode;
 import com.matthewdyer.assignment1.domain.MediaItem;
+import com.matthewdyer.assignment1.persistance.EpisodeDAO;
 import com.matthewdyer.assignment1.persistance.MediaDAO;
 
 @Service("mediaItemService")
 public class DefaultMediaItemService implements MediaItemService {
 	
 	private MediaDAO mediaDAO;
+	private EpisodeDAO episodeDAO;
 	
 	public DefaultMediaItemService(){
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
@@ -21,12 +24,11 @@ public class DefaultMediaItemService implements MediaItemService {
 		ctx.refresh();
 		
 		this.mediaDAO = ctx.getBean("mediaDAO",MediaDAO.class);
-
+		this.episodeDAO = ctx.getBean("episodeDAO",EpisodeDAO.class);
 	}
 	
 	
 	@Override
-	@Transactional(readOnly=true, propagation=Propagation.REQUIRED)
 	public List<MediaItem> findAll() {
 		return this.mediaDAO.findAll();
 	}
@@ -38,16 +40,38 @@ public class DefaultMediaItemService implements MediaItemService {
 
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED)
-	public MediaItem save(MediaItem contact) {
-		// TODO Auto-generated method stub
-		return null;
+	public MediaItem save(MediaItem m) {
+		return this.mediaDAO.save(m);
 	}
 
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED)
-	public void delete(MediaItem contact) {
-		// TODO Auto-generated method stub
+	public void delete(MediaItem m) {
+		this.mediaDAO.delete(m);
+	}
 
+
+	@Override
+	public List<Episode> findAllEpisodes(MediaItem m) {
+		return episodeDAO.findAll();
+	}
+
+
+	@Override
+	public Episode findEpisodeById(Long id) {
+		return episodeDAO.findById(id);
+	}
+
+
+	@Override
+	public Episode saveEpisode(Episode e) {
+		return this.episodeDAO.save(e);
+	}
+
+
+	@Override
+	public void delete(Episode e) {
+		this.episodeDAO.delete(e);
 	}
 
 }
