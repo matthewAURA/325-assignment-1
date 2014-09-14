@@ -7,30 +7,30 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>  
     
-    <spring:url value="/MediaItems" var="showContactUrl" />
+    <spring:url value="/app" var="showContactUrl" />
     
     <h1>Media Item Listing</h1>
     
-    <c:if test="${false}">
-    	<table>
-    		<thead>
-    			<tr>
-    				<th>First Name</th>
-    				<th>Last Name</th>
-    				<th>Birth Date</th>
-    			</tr>
-    		</thead>
-    		<tbody>
-    			<c:forEach items="${contacts}" var="contact">
-    				<tr>
-    					<td>
-    						<a href="${showContactUrl}/${contact.id}">${contact.firstName}</a>
-    					</td>
-    					<td>${contact.lastName}</td>
-    					<td><joda:format value="${contact.birthDate}" pattern="yyyy-MM-dd" /></td>
-    				</tr>
-    			</c:forEach>
-    		</tbody>
-    	</table>
-    </c:if>
+	    <c:if test="${not empty mediaItems}">
+	    	<table>
+	    		<thead>
+	    			<tr>
+	    				<th>Title</th>
+	    				<th>Description</th>
+	    				<th>Rating</th>
+	    			</tr>
+	    		</thead>
+	    		<tbody>
+	    			<c:forEach items="${mediaItems}" var="media">
+	    				<tr>
+	    					<td>
+	    						<a href="${showContactUrl}/${media.id}">${media.title}</a>
+	    					</td>
+	    					<td>${media.description}</td>
+	    					<td>${media.rating}</td>
+	    				</tr>
+	    			</c:forEach>
+	    		</tbody>
+	    	</table>
+	    </c:if>
 </div>

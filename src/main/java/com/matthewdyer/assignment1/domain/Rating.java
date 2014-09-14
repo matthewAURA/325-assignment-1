@@ -42,4 +42,8 @@ public class Rating {
 	public void setRatingName(String r){
 		this.ratingName = r;
 	}
+	
+	public String toString(){
+		return this.ratingName;
+	}
 }

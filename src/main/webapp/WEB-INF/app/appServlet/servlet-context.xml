@@ -39,6 +39,6 @@
 	</beans:bean>
 	
 	<!-- Scan the com.aucklanduni.spring.mvc.controller package for annotated components. -->
-	<context:component-scan base-package="com.matthewdyer.assignment1.mvc.controller" /> 
+	<context:component-scan base-package="com.matthewdyer.assignment1.mvc.controller com.matthewdyer.assignment1.service" /> 
 	
 </beans:beans>
