@@ -13,10 +13,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=8" />
 		
-        <spring:url value="/resources/standard.css" var="app_css_url" />
+        <spring:url value="/app/resources/standard.css" var="app_css_url" />
         <link rel="stylesheet" type="text/css" media="screen" href="${app_css_url}" />
 		
-		<title>Movie Contacts App</title>
+		<title>Movie Database App</title>
 	</head>
 	
   	<body class="tundra spring">

@@ -9,5 +9,5 @@
 	<spring:url value="/contacts?form" var="addContactUrl"/>
 
     <h3>Menu</h3>
-    <a href="${addContactUrl}"><h3>New contact</h3></a>
+    <a href="${addContactUrl}"><h3>New Movie</h3></a>
 </div>
