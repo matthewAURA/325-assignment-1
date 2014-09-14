@@ -1,4 +1,4 @@
-package com.matthewdyer.assignment1.control;
+package com.matthewdyer.assignment1.mvc.restcontroller;
 
 import javax.servlet.http.HttpServletResponse;
 

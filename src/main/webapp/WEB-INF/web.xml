@@ -27,7 +27,23 @@
 		
 	<servlet-mapping>
 		<servlet-name>mediaItemService</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	  <!--  Spring's DispatcherServlet is used to handle incoming HTTP requests. -->
+	  <servlet>
+	    <servlet-name>appServlet</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    <init-param>
+	      <param-name>contextConfigLocation</param-name>
+	      <param-value>/WEB-INF/app/appServlet/servlet-context.xml</param-value>
+	    </init-param>
+	    <load-on-startup>1</load-on-startup>
+	  </servlet>
+
+	  <servlet-mapping>
+	    <servlet-name>appServlet</servlet-name>
+	    <url-pattern>/app/*</url-pattern>
+	  </servlet-mapping>
+	
 </web-app>

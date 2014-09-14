@@ -15,7 +15,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <context:component-scan base-package="com.matthewdyer.assignment1.service com.matthewdyer.assignment1.control" />
+    <context:component-scan base-package="com.matthewdyer.assignment1.service com.matthewdyer.assignment1.mvc.restcontroller" />
 
     <bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller">
         <property name="mappingLocation" value="classpath:oxm-mapping.xml"/>
