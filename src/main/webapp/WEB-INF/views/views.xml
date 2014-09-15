@@ -9,7 +9,7 @@
         <put-attribute name="body"
             value="/WEB-INF/views/media/show.jspx" />
     </definition>
-    <definition extends="default" name="media/update">
+    <definition extends="default" name="media/edit">
         <put-attribute name="body"
             value="/WEB-INF/views/media/edit.jspx" />
     </definition>

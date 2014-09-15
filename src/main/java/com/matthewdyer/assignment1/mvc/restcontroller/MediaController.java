@@ -6,12 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
+
 import com.matthewdyer.assignment1.domain.Episode;
 import com.matthewdyer.assignment1.domain.Episodes;
 import com.matthewdyer.assignment1.domain.MediaItem;
@@ -23,26 +25,53 @@ import com.matthewdyer.assignment1.service.MediaItemService;
 
 
 @Controller
-@RequestMapping(value="/MediaItems")
+@RequestMapping(value="/")
 public class MediaController {
 	final Logger logger = LoggerFactory.getLogger(MediaController.class);
 	
 	@Autowired
 	private MediaItemService mediaItemService;
 	
+
+	
 	@RequestMapping(method = RequestMethod.GET)
-	@ResponseBody
-	public MediaItems listData(WebRequest webRequest) {
-		return new MediaItems(mediaItemService.findAll());
-	}	
-  
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	@ResponseBody
-	public MediaItem findMediaItemById(@PathVariable Long id) {		
-		return mediaItemService.findById(id);
+	public String list(Model uiModel) {
+		uiModel.addAttribute("mediaItems", mediaItemService.findAll());
+		
+		// Return the logical name of the view.
+		return "media/list";
 	}
 	
-	@RequestMapping(value="/Create", method=RequestMethod.POST)
+	@RequestMapping(value="/{id}",method = RequestMethod.GET)
+	public String show(@PathVariable Long id,Model uiModel) {
+		MediaItem m = this.mediaItemService.findById(id);
+		uiModel.addAttribute("mediaItem", m);
+		uiModel.addAttribute("episodes", m.getEpisodes());
+		
+		// Return the logical name of the view.
+		return "media/show";
+	}
+	
+	@RequestMapping(value="{id}/edit",method = RequestMethod.GET)
+	public String edit(@PathVariable Long id,Model uiModel) {
+		MediaItem m = this.mediaItemService.findById(id);
+		uiModel.addAttribute("mediaItem", m);
+		uiModel.addAttribute("episodes", m.getEpisodes());
+		
+		// Return the logical name of the view.
+		return "media/edit";
+	}
+	
+	@RequestMapping(value="/create",method = RequestMethod.GET)
+	public String newMediaItem(Model uiModel) {
+		
+		// Return the logical name of the view.
+		return "media/edit";
+	}
+	
+	
+	
+	@RequestMapping(value="{id}/edit", method=RequestMethod.POST)
 	@ResponseBody
 	public MediaItem create(@RequestBody MediaItem m, HttpServletResponse response) {
 		logger.info("Creating MediaItem: "+m);
@@ -66,7 +95,7 @@ public class MediaController {
 		response.setHeader("Location",  "/MediaItems/");
 	}
 	
-	
+	/*
 	@RequestMapping(value="/{id}/Episodes", method=RequestMethod.GET)
 	@ResponseBody
 	public Episodes findEpisodesById(@PathVariable Long id) {		
@@ -78,7 +107,7 @@ public class MediaController {
 	@ResponseBody
 	public Episode findEpisodeById(@PathVariable Long id,@PathVariable Long eId) {		
 		return mediaItemService.findEpisodeById(eId);
-	}
+	}*/
 	
 	@RequestMapping(value="/{id}/Episodes/Create", method=RequestMethod.POST)
 	@ResponseBody

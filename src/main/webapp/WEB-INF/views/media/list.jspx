@@ -7,8 +7,6 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>  
     
-    <spring:url value="/app" var="showContactUrl" />
-    
     <h1>Media Item Listing</h1>
     
 	    <c:if test="${not empty mediaItems}">
@@ -24,7 +22,7 @@
 	    			<c:forEach items="${mediaItems}" var="media">
 	    				<tr>
 	    					<td>
-	    						<a href="${showContactUrl}/${media.id}">${media.title}</a>
+	    						<a href="${media.id}">${media.title}</a>
 	    					</td>
 	    					<td>${media.description}</td>
 	    					<td>${media.rating}</td>

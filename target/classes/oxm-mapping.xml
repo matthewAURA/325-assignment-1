@@ -16,7 +16,7 @@
          <field name="description" type="string">
             <bind-xml name="description" node="element"/>
         </field>    
-        <field name="episodes" type="com.matthewdyer.assignment1.domain.Episode" collection="set">
+        <field name="episodes" type="com.matthewdyer.assignment1.domain.Episode" collection="arraylist">
         	<bind-xml name="episode"/>
         </field> 
         <field name="rating" type="com.matthewdyer.assignment1.domain.Rating">

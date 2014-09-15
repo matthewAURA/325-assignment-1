@@ -15,10 +15,40 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <context:component-scan base-package="com.matthewdyer.assignment1.service com.matthewdyer.assignment1.mvc.restcontroller" />
-
     <bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller">
         <property name="mappingLocation" value="classpath:oxm-mapping.xml"/>
     </bean>     
+    
+    <!-- Handles HTTP GET requests for /resources/** (i.e. any resource whose pathname is prefixed 
+	     by "/resources/"). The html directory stores the static content, e.g. stylesheets, images etc. -->
+	<mvc:resources mapping="/resources/**" location="/html/" />
+	
+	<!-- Setup a ViewResolver that finds views that are Tiles template definitions. The logical view
+	     name maps to a Tile definition of the same name. -->
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver" />
+	
+	<!-- A TilesViewResolver bean doesn't know anything about Tile definitions. A TilesViewResolver 
+	     beans relies on a TilesConfigurer bean to keep track of the required definitions. -->
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<!-- layouts.xml defines the default (common) tile template. -->
+				<value>/WEB-INF/layouts/layouts.xml</value>
+				<!-- views.xml defines the additional templates for particular views. -->
+				<value>/WEB-INF/views/views.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Used in conjunction with form validation, this bean allows custom messages stored in file
+	     messages.properties (located on the classpath in resources/) to be used. -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
+	
+	
+    <context:component-scan base-package="com.matthewdyer.assignment1.service com.matthewdyer.assignment1.mvc.restcontroller" />
+
+	
 
 </beans>

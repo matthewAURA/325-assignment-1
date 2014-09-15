@@ -3,6 +3,7 @@ package com.matthewdyer.assignment1.domain;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -30,7 +31,7 @@ public class MediaItem implements Serializable {
 	protected String title;
 	protected String description;
 	protected Rating rating;
-	private Set<Episode> episodes;
+	private List<Episode> episodes;
 	public MediaItem(){
 		
 	}
@@ -46,11 +47,11 @@ public class MediaItem implements Serializable {
 	}
 	
 	@OneToMany(mappedBy = "media", targetEntity=Episode.class, orphanRemoval=true, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	public Set<Episode> getEpisodes() {
+	public List<Episode> getEpisodes() {
 		return this.episodes;
 	}
 
-	public void setEpisodes(Set<Episode> episodes) {
+	public void setEpisodes(List<Episode> episodes) {
 		this.episodes = episodes;
 	}
 	
